@@ -1,5 +1,9 @@
 package Tool
 
+func StringToInt64Array(s string) []int64 {
+	var items []string = StringSlit(s)
+	return StringArrayToInt64Array(items)
+}
 func StringToFloat32Array(s string) []float32 {
 	var items []string = StringSlit(s)
 	return StringArrayToFloat32Array(items)

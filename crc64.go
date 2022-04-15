@@ -1,4 +1,4 @@
-package Tools
+package Tool
 
 import (
 	"github.com/cespare/xxhash/v2"

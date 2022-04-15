@@ -1,4 +1,4 @@
-module github.com/yangkequn/Tools
+module github.com/yangkequn/Tool
 
 go 1.18
 

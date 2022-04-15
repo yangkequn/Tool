@@ -1,4 +1,4 @@
-package Tools
+package Tool
 
 //convert []string to []float32
 func StringArrayToFloat32Array(array []string) (result []float32, err error) {

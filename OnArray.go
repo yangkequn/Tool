@@ -1,15 +1,16 @@
 package Tool
 
 //convert []string to []float32
-func StringArrayToFloat32Array(array []string) (result []float32, err error) {
+func StringArrayToFloat32Array(array []string) (result []float32) {
+	result = make([]float32, len(array))
 	for _, v := range array {
 		f32, err := StringToFloat32(v)
 		if err != nil {
-			return nil, err
+			return result
 		}
 		result = append(result, f32)
 	}
-	return result, nil
+	return result
 }
 
 //convert []string to []int64

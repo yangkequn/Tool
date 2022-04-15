@@ -1,5 +1,10 @@
 package Tool
 
+func StringToFloat32Array(s string) []float32 {
+	var items []string = StringSlit(s)
+	return StringArrayToFloat32Array(items)
+}
+
 //convert []string to []float32
 func StringArrayToFloat32Array(array []string) (result []float32) {
 	result = make([]float32, len(array))

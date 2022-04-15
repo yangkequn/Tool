@@ -57,3 +57,12 @@ func UserIdFromContext(ctx context.Context) (uid string, err error) {
 	}
 	return uid, nil
 }
+
+//validate user id
+func ValidateJwtUser(ctx context.Context, uid string) bool {
+	UId, err := UserIdFromContext(ctx)
+	if err != nil {
+		return false
+	}
+	return UId == uid
+}

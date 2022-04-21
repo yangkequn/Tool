@@ -47,7 +47,7 @@ func NonRedundantMerge(list1 *string, list2 string, toFront bool) bool {
 	}
 	return len(kept) > 0
 }
-func Merge(list1 *string, list2 string, toFront bool) bool {
+func MergeStringWithString(list1 *string, list2 string, toFront bool) bool {
 	if len(list2) == 0 {
 		return false
 	}
@@ -60,4 +60,17 @@ func Merge(list1 *string, list2 string, toFront bool) bool {
 		*list1 = *list1 + "," + list2
 	}
 	return true
+}
+func MergeStringWithStringArray(list1 *string, list2 []string, toFront bool) bool {
+	if len(list2) == 0 {
+		return false
+	}
+	if len(*list1) == 0 {
+		return false
+	}
+	kept := strings.Join(list2, ",") //kept 应当保留原先的顺序
+	if len(kept) == 0 {
+		return false
+	}
+	return MergeStringWithString(list1, kept, toFront)
 }

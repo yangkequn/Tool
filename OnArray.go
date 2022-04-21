@@ -1,5 +1,7 @@
 package Tool
 
+import "strconv"
+
 func StringToInt64Array(s string) []int64 {
 	var items []string = StringSlit(s)
 	return StringArrayToInt64Array(items)
@@ -7,6 +9,20 @@ func StringToInt64Array(s string) []int64 {
 func StringToFloat32Array(s string) []float32 {
 	var items []string = StringSlit(s)
 	return StringArrayToFloat32Array(items)
+}
+func Float32ArrayToString(array []float32) string {
+	var result string
+	for _, v := range array {
+		result += strconv.FormatFloat(float64(v), 'f', 5, 32) + ","
+	}
+	return result
+}
+func Float64ArrayToString(array []float64) string {
+	var result string
+	for _, v := range array {
+		result += strconv.FormatFloat(float64(v), 'f', 15, 64) + ","
+	}
+	return result
 }
 
 //convert []string to []float32

@@ -21,7 +21,8 @@ func Float32ArrayToString(array []float32) (result string) {
 		return ""
 	}
 	for _, v := range array {
-		result += strconv.FormatFloat(float64(v), 'f', 5, 32) + ","
+		// parameter -1 means no trailing zeros
+		result += strconv.FormatFloat(float64(v), 'f', -1, 32) + ","
 	}
 	return result[:len(result)-1]
 }
@@ -30,7 +31,7 @@ func Float64ArrayToString(array []float64) (result string) {
 		return ""
 	}
 	for _, v := range array {
-		result += strconv.FormatFloat(float64(v), 'f', 15, 64) + ","
+		result += strconv.FormatFloat(float64(v), 'f', -1, 64) + ","
 	}
 	return result[:len(result)-1]
 }

@@ -73,7 +73,7 @@ func RemoveItemFromStringArray(array *[]string, item string) bool {
 }
 
 //convert []int64 to []string
-func Int64ArrayToBasr64StringArray(array []int64) []string {
+func Int64ArrayToBase64StringArray(array []int64) []string {
 	var result []string
 	for _, v := range array {
 		result = append(result, Int64ToString(v))
@@ -81,7 +81,7 @@ func Int64ArrayToBasr64StringArray(array []int64) []string {
 	return result
 }
 func Int64ArrayToBase64String(unixTime []int64) string {
-	var result []string = Int64ArrayToBasr64StringArray(unixTime)
+	var result []string = Int64ArrayToBase64StringArray(unixTime)
 	return StringsJoint(result)
 }
 func Int64ArrayToBase10String(unixTime []int64) (result string) {

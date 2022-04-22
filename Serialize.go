@@ -3,6 +3,7 @@ package Tool
 import (
 	"bytes"
 	"encoding/gob"
+	"strconv"
 )
 
 // return string encoded by Gob
@@ -28,11 +29,14 @@ func GobDecode(str string, d interface{}) error {
 }
 
 var MaxTimeDiff int64 = 365 * 24 * 60 * 60 * 1000 //1 years = 365 days = 365 * 24 * 60 * 60 * 1000
-func UnixTimeStringToArray_ms(timeString string) (unixTime []int64) {
+// JSTimeSequenceStringToArray convert JSTimeSequenceString to []int64
+// unit of JS time is millisecond
+// if value of JS time larger than 1 year, it's absolute time, otherwise it's timespan
+func JSTimeSequenceStringToArray(timeString string) (unixTime []int64) {
 	timeArray := StringSlit(timeString)
 	unixTime = make([]int64, len(timeArray))
 	for i, v := range timeArray {
-		unixTime[i] = StringToInt64(v)
+		unixTime[i], _ = strconv.ParseInt(v, 10, 64)
 	}
 	// adjust unixTime to unixTime_ms
 	for i, v := range unixTime {

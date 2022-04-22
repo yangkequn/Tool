@@ -52,7 +52,8 @@ func MergeStringWithString(list1 *string, list2 string, toFront bool) bool {
 		return false
 	}
 	if len(*list1) == 0 {
-		return false
+		*list1 = list2 //list2 已经不为0
+		return true
 	}
 	if toFront {
 		*list1 = list2 + "," + *list1
@@ -63,9 +64,6 @@ func MergeStringWithString(list1 *string, list2 string, toFront bool) bool {
 }
 func MergeStringWithStringArray(list1 *string, list2 []string, toFront bool) bool {
 	if len(list2) == 0 {
-		return false
-	}
-	if len(*list1) == 0 {
 		return false
 	}
 	kept := strings.Join(list2, ",") //kept 应当保留原先的顺序

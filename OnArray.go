@@ -75,6 +75,10 @@ func Int64ArrayToStringArray(array []int64) []string {
 	}
 	return result
 }
+func Int64ArrayToString(unixTime []int64) string {
+	var result []string = Int64ArrayToStringArray(unixTime)
+	return StringsJoint(result)
+}
 
 // return index of item in string array, -1 if not found
 func IndexOfStringArray(array []string, item string) int {

@@ -45,10 +45,3 @@ func UnixTimeStringToArray_ms(timeString string) (unixTime []int64) {
 	}
 	return unixTime
 }
-func UnixTimeArrayToString_ms(unixTime []int64) string {
-	var result []string
-	for i, v := range unixTime {
-		result[i] = Int64ToString(v)
-	}
-	return StringsJoint(result)
-}

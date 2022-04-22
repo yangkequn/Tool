@@ -16,19 +16,23 @@ func StringToFloat32Array(s string) []float32 {
 	var items []string = StringSlit(s)
 	return StringArrayToFloat32Array(items)
 }
-func Float32ArrayToString(array []float32) string {
-	var result string
+func Float32ArrayToString(array []float32) (result string) {
+	if len(array) == 0 {
+		return ""
+	}
 	for _, v := range array {
 		result += strconv.FormatFloat(float64(v), 'f', 5, 32) + ","
 	}
-	return result
+	return result[:len(result)-1]
 }
-func Float64ArrayToString(array []float64) string {
-	var result string
+func Float64ArrayToString(array []float64) (result string) {
+	if len(array) == 0 {
+		return ""
+	}
 	for _, v := range array {
 		result += strconv.FormatFloat(float64(v), 'f', 15, 64) + ","
 	}
-	return result
+	return result[:len(result)-1]
 }
 
 //convert []string to []float32

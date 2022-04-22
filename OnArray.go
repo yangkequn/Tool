@@ -73,16 +73,33 @@ func RemoveItemFromStringArray(array *[]string, item string) bool {
 }
 
 //convert []int64 to []string
-func Int64ArrayToStringArray(array []int64) []string {
+func Int64ArrayToBasr64StringArray(array []int64) []string {
 	var result []string
 	for _, v := range array {
 		result = append(result, Int64ToString(v))
 	}
 	return result
 }
-func Int64ArrayToString(unixTime []int64) string {
-	var result []string = Int64ArrayToStringArray(unixTime)
+func Int64ArrayToBase64String(unixTime []int64) string {
+	var result []string = Int64ArrayToBasr64StringArray(unixTime)
 	return StringsJoint(result)
+}
+func Int64ArrayToBase10String(unixTime []int64) (result string) {
+	for _, v := range unixTime {
+		result += strconv.FormatInt(v, 10) + ","
+	}
+	return result[:len(result)-1]
+}
+func Base10StringToInt64Array(s string) (result []int64) {
+	var items []string = StringSlit(s)
+	for _, v := range items {
+		i, err := strconv.ParseInt(v, 10, 64)
+		if err != nil {
+			return result
+		}
+		result = append(result, i)
+	}
+	return result
 }
 
 // return index of item in string array, -1 if not found

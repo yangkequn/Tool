@@ -1,7 +1,13 @@
 package Tool
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
+func StringsJoint(stringArray []string) string {
+	return strings.Join(stringArray, ",")
+}
 func StringToInt64Array(s string) []int64 {
 	var items []string = StringSlit(s)
 	return StringArrayToInt64Array(items)

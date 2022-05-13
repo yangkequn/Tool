@@ -58,26 +58,48 @@ func JsonToStruct(value *string, result interface{}) error {
 
 //RedisCall: 1.use RPush to push data to redis. 2.use BLPop to pop data from selected channel
 //return: error
-func RedisDo(c context.Context, rds *redis.Client, CmdRedisKey string, ResultRedisKey string, param interface{}) (value string, err error) {
+func RedisDo(c context.Context, rds *redis.Client, ServiceKey string, param map[string]interface{}) (value string, err error) {
 	var (
 		b       []byte
 		results []string
 	)
+	param["BackTo"] = Int64ToString(rand.Int63())
 
 	if b, err = json.Marshal(param); err != nil {
 		return "", err
 	}
 	ppl := rds.Pipeline()
-	ppl.RPush(c, CmdRedisKey, b)
+	ppl.RPush(c, ServiceKey, b)
 	//长期不执行的任务，抛弃
-	ppl.Expire(c, CmdRedisKey, time.Second*60)
+	ppl.Expire(c, ServiceKey, time.Second*60)
 	if _, err := ppl.Exec(c); err != nil {
 		return "", err
 	}
-	if results, err = rds.BLPop(c, time.Second*5, ResultRedisKey).Result(); err != nil {
+	//BLPop 返回结果 [key1,value1,key2,value2]
+	if results, err = rds.BLPop(c, time.Second*5, param["BackTo"].(string)).Result(); err != nil {
 		return "", err
 	}
-	return results[0], nil
+	return results[1], nil
+}
+
+var heartbeatRedisClient *redis.Client = redis.NewClient(&redis.Options{
+	Addr:     "docker.vm:6379", // use default Addr
+	Password: "",               // no password set
+	DB:       15,               // use default DB
+})
+
+func QueryHeartBeat(c context.Context, Data []int64) (heartbeat float32, err error) {
+	result, err := RedisDo(c, heartbeatRedisClient, "heart_beat", map[string]interface{}{
+		"BackTo": Int64ToString(rand.Int63()),
+		"Data":   Data,
+	})
+	if err != nil {
+		return 0, err
+	}
+	if err = json.Unmarshal([]byte(result), &heartbeat); err != nil {
+		return 0, err
+	}
+	return heartbeat, nil
 }
 
 // RedisAPI 通过redis调用API的一般框架

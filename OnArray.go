@@ -90,16 +90,23 @@ func Int64ArrayToBase10String(unixTime []int64) (result string) {
 	}
 	return result[:len(result)-1]
 }
-func Base10StringToInt64Array(s string) (result []int64) {
+func Base10StringToInt64Array(s string) (result []int64, err error) {
+	var (
+		lastValue int64
+	)
 	var items []string = StringSlit(s)
 	for _, v := range items {
-		i, err := strconv.ParseInt(v, 10, 64)
-		if err != nil {
-			return result
+		if v == "" {
+			result = append(result, lastValue)
+			continue
 		}
-		result = append(result, i)
+
+		if lastValue, err = strconv.ParseInt(v, 10, 64); err != nil {
+			return result, err
+		}
+		result = append(result, lastValue)
 	}
-	return result
+	return result, nil
 }
 
 // return index of item in string array, -1 if not found

@@ -94,7 +94,7 @@ func Base10StringToInt64Array(s string) (result []int64, err error) {
 	var (
 		lastValue int64
 	)
-	var items []string = StringSlit(s)
+	var items []string = strings.Split(s, ",")
 	for _, v := range items {
 		if v == "" {
 			result = append(result, lastValue)

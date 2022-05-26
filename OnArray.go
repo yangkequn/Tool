@@ -84,10 +84,10 @@ func Int64ArrayToBase64String(unixTime []int64) string {
 	var result []string = Int64ArrayToBase64StringArray(unixTime)
 	return StringsJoint(result)
 }
-func Int64ArrayToBase10String(unixTime []int64) (result string) {
-	var resultArray []string = make([]string, len(unixTime))
-	for _, v := range unixTime {
-		resultArray = append(resultArray, strconv.FormatInt(v, 10))
+func Int64ArrayToBase10String(data []int64) (result string) {
+	var resultArray []string = make([]string, len(data))
+	for i, v := range data {
+		resultArray[i] = strconv.FormatInt(v, 10)
 	}
 	return StringsJoint(resultArray)
 }

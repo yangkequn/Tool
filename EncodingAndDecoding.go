@@ -67,8 +67,11 @@ func EncodeAccelero(data []int64) (r string) {
 			counter += 1
 		}
 	}
-	if counter > 1 {
-		if counter < 10 {
+
+	if counter -= 1; counter > 0 {
+		if counter == 1 {
+			resultArray = append(resultArray, ",")
+		} else if counter < 10 {
 			resultArray = append(resultArray, "v"+strconv.Itoa(counter))
 		} else if counter < 100 {
 			resultArray = append(resultArray, "w"+strconv.Itoa(counter))

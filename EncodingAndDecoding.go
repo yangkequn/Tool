@@ -40,29 +40,27 @@ func EncodeAccelero(data []int64) (r string) {
 		return ""
 	}
 
-	var resultArray []string = make([]string, len(data))
-	var cntTotal, counter int = 0, 0
+	var resultArray []string = make([]string, 0, len(data))
+	var counter int = 0
 	var lastValue int64 = data[0] + 1
 	for i, v := range data {
 		if v != lastValue {
 			if i != 0 {
 				if counter == 1 {
-					resultArray[cntTotal] = ","
+					resultArray = append(resultArray, ",")
 				} else if counter < 10 {
-					resultArray[cntTotal] = "v" + strconv.Itoa(counter)
+					resultArray = append(resultArray, "v"+strconv.Itoa(counter))
 				} else if counter < 100 {
-					resultArray[cntTotal] = "w" + strconv.Itoa(counter)
+					resultArray = append(resultArray, "w"+strconv.Itoa(counter))
 				} else if counter < 1000 {
-					resultArray[cntTotal] = "x" + strconv.Itoa(counter)
+					resultArray = append(resultArray, "x"+strconv.Itoa(counter))
 				} else if counter < 10000 {
-					resultArray[cntTotal] = "y" + strconv.Itoa(counter)
+					resultArray = append(resultArray, "y"+strconv.Itoa(counter))
 				} else {
-					resultArray[cntTotal] = "z" + strconv.Itoa(counter)
+					resultArray = append(resultArray, "z"+strconv.Itoa(counter))
 				}
-				cntTotal += 1
 			}
-			resultArray[cntTotal] = strconv.FormatInt(v, 10)
-			cntTotal += 1
+			resultArray = append(resultArray, strconv.FormatInt(v, 10))
 			lastValue = v
 			counter = 1
 		} else {
@@ -71,17 +69,16 @@ func EncodeAccelero(data []int64) (r string) {
 	}
 	if counter > 1 {
 		if counter < 10 {
-			resultArray[cntTotal] = "v" + strconv.Itoa(counter)
+			resultArray = append(resultArray, "v"+strconv.Itoa(counter))
 		} else if counter < 100 {
-			resultArray[cntTotal] = "w" + strconv.Itoa(counter)
+			resultArray = append(resultArray, "w"+strconv.Itoa(counter))
 		} else if counter < 1000 {
-			resultArray[cntTotal] = "x" + strconv.Itoa(counter)
+			resultArray = append(resultArray, "x"+strconv.Itoa(counter))
 		} else if counter < 10000 {
-			resultArray[cntTotal] = "y" + strconv.Itoa(counter)
+			resultArray = append(resultArray, "y"+strconv.Itoa(counter))
 		} else {
-			resultArray[cntTotal] = "z" + strconv.Itoa(counter)
+			resultArray = append(resultArray, "z"+strconv.Itoa(counter))
 		}
-		cntTotal += 1
 	}
-	return strings.Join(resultArray[:cntTotal], "")
+	return strings.Join(resultArray, "")
 }

@@ -9,10 +9,13 @@ require (
 	github.com/milvus-io/milvus-sdk-go/v2 v2.0.0
 )
 
+require github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
+
 require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/onsi/ginkgo v1.16.5 // indirect
+	github.com/vmihailenco/msgpack/v5 v5.3.5
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
 	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9 // indirect
 	golang.org/x/text v0.3.7 // indirect

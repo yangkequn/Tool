@@ -22,8 +22,7 @@ func RedisGet(c context.Context, rds *redis.Client, key string, param interface{
 	if err != nil {
 		return err
 	}
-	err = msgpack.Unmarshal(data, param)
-	return err
+	return msgpack.Unmarshal(data, param)
 }
 func RedisSetString(c context.Context, rds *redis.Client, key string, param string, expiration time.Duration) (err error) {
 	cmd := rds.Set(c, key, param, expiration)

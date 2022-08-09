@@ -17,8 +17,8 @@ jobs:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "v0.3.13"
+        automatic_release_tag: "v0.3.14"
         prerelease: false
-        title: "v0.3.13"
+        title: "v0.3.14"
         files: |
           *.*
